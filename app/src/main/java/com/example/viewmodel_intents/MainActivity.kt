@@ -7,9 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+import com.example.viewmodel_intents.viewmodel.MainActivityData
 
 class MainActivity : AppCompatActivity() {
-    var count = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,14 +24,16 @@ class MainActivity : AppCompatActivity() {
 
         val textView:TextView = findViewById(R.id.textView)
         val button:Button = findViewById(R.id.button)
-        textView.setText(count.toString())
+        val viewModel = ViewModelProvider(this)[MainActivityData::class.java]
+
+        textView.text = viewModel.count.value.toString()
 
         button.setOnClickListener{
-            count++
+            viewModel.increment()
+        }
 
-            textView.setText(count.toString())
-
-
+        viewModel.count.observe(this){
+            textView.text = it.toString()
         }
 
     }
