@@ -1,11 +1,16 @@
 package com.example.viewmodel_intents
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.registerForActivityResult
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -26,7 +31,17 @@ class MainActivity2 : AppCompatActivity() {
         val sms: Button = findViewById(R.id.button2)
         val webBrowser: Button = findViewById(R.id.button5)
         val email: Button = findViewById(R.id.button6)
+        val camera:Button = findViewById(R.id.button7)
+        val imageView:ImageView = findViewById(R.id.imageView)
 
+        val thumbnailLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+
+            if(it.resultCode== RESULT_OK){
+                val data = it.data
+                val imageBitmap = data?.extras?.get("data") as? Bitmap
+                        imageView.setImageBitmap(imageBitmap)
+            }
+        }
 
 
         main.setOnClickListener {
@@ -77,6 +92,12 @@ class MainActivity2 : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_TEXT, mailBody)
             startActivity(intent)
 
+        }
+
+        camera.setOnClickListener{
+            val intent = Intent()
+            intent.action = MediaStore.ACTION_IMAGE_CAPTURE
+            thumbnailLauncher.launch(intent)
         }
 
 
