@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ViewModel_Intents</string>
+    <string name="btnMain">Open Main Activity</string>
+    <string name="btnCall">Call</string>
+    <string name="btnSMS">SMS</string>
+    <string name="btnWebBrowser">Web Browser</string>
+    <string name="btnEmail">Email</string>
+    <string name="btnCamera">Camera</string>
+
 </resources>

@@ -13,13 +13,21 @@
         android:theme="@style/Theme.ViewModel_Intents"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".MainActivity2"
+            android:exported="true"
+            android:theme="@style/Theme.ViewModel_Intents" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter></activity>
+
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity2" >
+
         </activity>
     </application>
 
